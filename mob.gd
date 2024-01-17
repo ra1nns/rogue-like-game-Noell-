@@ -1,9 +1,7 @@
 extends CharacterBody2D
 
-var player 
+@onready var player = get_node("/root/Game/Player")
 
-func _ready():
-	player = get_node("/root/Game/Player")
 
 func _process(delta):
 	var direction = global_position.direction_to(player.global_position)
