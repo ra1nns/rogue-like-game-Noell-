@@ -14,3 +14,5 @@ shape = SubResource("CircleShape2D_hjijx")
 
 [node name="HappyBoo" parent="." instance=ExtResource("1_lo34s")]
 unique_name_in_owner = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
