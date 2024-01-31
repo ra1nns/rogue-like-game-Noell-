@@ -1,11 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpvo361uihrt6"]
+[gd_scene load_steps=5 format=3 uid="uid://cpvo361uihrt6"]
 
 [ext_resource type="PackedScene" uid="uid://cqirtpmbkrfev" path="res://player.tscn" id="1_e0ia2"]
+[ext_resource type="Script" path="res://rogue_game.gd" id="1_tirqn"]
 [ext_resource type="PackedScene" uid="uid://benthg4u1do6d" path="res://tree.tscn" id="2_nn2d6"]
-[ext_resource type="PackedScene" uid="uid://byfbhhhwsw5fm" path="res://mob.tscn" id="2_psara"]
+
+[sub_resource type="Curve2D" id="Curve2D_7ww6b"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -69, -123, 0, 0, 0, 0, 2047, -112, 0, 0, 0, 0, 2084, 1141, 0, 0, 0, 0, -80, 1130, 0, 0, 0, 0, -74, -118, 0, 0, 0, 0, -80, -120)
+}
+point_count = 6
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_tirqn")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -30
@@ -16,9 +23,6 @@ offset_bottom = 1080.0
 
 [node name="Player" parent="." instance=ExtResource("1_e0ia2")]
 position = Vector2(890, 476)
-
-[node name="Mob" parent="." instance=ExtResource("2_psara")]
-position = Vector2(426, 310)
 
 [node name="Tree" parent="." instance=ExtResource("2_nn2d6")]
 position = Vector2(146, 762)
@@ -43,3 +47,17 @@ position = Vector2(819, 954)
 
 [node name="Tree8" parent="." instance=ExtResource("2_nn2d6")]
 position = Vector2(1094, 946)
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_7ww6b")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+unique_name_in_owner = true
+position = Vector2(-69, -123)
+rotation = 0.00519844
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.35
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
